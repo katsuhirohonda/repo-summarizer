@@ -1,6 +1,6 @@
 [package]
 name = "repo-summarizer"
-version = "0.1.0"
+version = "0.0.1"
 edition = "2024"
 authors = ["Katsuhiro Honda <freewave3@gmail.com>"]
 description = "A tool for generating a text file summary of directory contents"
