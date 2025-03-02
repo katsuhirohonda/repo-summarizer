@@ -1,10 +1,9 @@
 use anyhow::{Context, Result};
-use ignore::{DirEntry, Walk, WalkBuilder};
-use ptree::{Style, TreeBuilder, print_tree};
-use rayon::prelude::*;
+use ignore::{Walk, WalkBuilder};
+use infer;
+use ptree::PrintConfig;
 use std::collections::HashSet;
 use std::fs::{File, read_link};
-use std::io::{self, Write as IoWrite};
 use std::io::{BufWriter, Write};
 use std::path::{Path, PathBuf};
 
@@ -232,7 +231,8 @@ fn add_dir_to_tree(
 fn is_binary_file(path: &Path) -> Result<bool> {
     // Use the infer crate to detect file type
     if let Ok(buffer) = std::fs::read(path) {
-        if infer::is_binary(&buffer) {
+        // Check if the file has a known binary format
+        if infer::get(&buffer).is_some() {
             return Ok(true);
         }
 
@@ -277,7 +277,7 @@ fn process_file_contents(writer: &mut impl Write, file_paths: &[PathBuf]) -> Res
 
 /// Print a tree structure to a writer
 fn print_tree_to_writer(writer: &mut impl Write, tree: &ptree::item::StringItem) -> Result<()> {
-    let config = Style::default();
+    let config = PrintConfig::default();
     ptree::write_tree_with(tree, writer, &config).context("Failed to write tree")?;
     Ok(())
 }
