@@ -1,11 +1,11 @@
 [package]
 name = "repo-summarizer"
-version = "0.0.1"
+version = "0.0.2"
 edition = "2024"
 authors = ["Katsuhiro Honda <freewave3@gmail.com>"]
 description = "A tool for generating a text file summary of directory contents"
 license = "MIT"
-repository = "https://github.com/e-bebe/repo-summarizer"
+repository = "https://github.com/katsuhirohonda/repo-summarizer"
 keywords = ["directory", "summary", "code", "snapshot", "documentation"]
 categories = ["command-line-utilities", "development-tools"]
 
